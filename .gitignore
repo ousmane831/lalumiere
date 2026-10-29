@@ -1,0 +1,73 @@
+==========================================
+PYTHON / DJANGO - BACKEND
+==========================================
+Environnement virtuel
+
+venv/ .venv/ env/
+
+Cache Python
+
+pycache/ *.py[cod] *$py.class
+
+Django
+
+*.log local_settings.py db.sqlite3 db.sqlite3-journal
+
+Fichiers de configuration sensibles
+
+.env .env.* !.env.example
+
+Fichiers uploadés
+
+media/
+
+Fichiers statiques collectés
+
+staticfiles/
+
+Migrations : conserver les migrations Django dans Git
+Ne pas ignorer les dossiers migrations/
+==========================================
+REACT / NODE.JS - FRONTEND
+==========================================
+
+node_modules/ dist/ build/ .next/ coverage/
+
+Fichiers de logs
+
+npm-debug.log* yarn-debug.log* pnpm-debug.log*
+
+Variables d'environnement frontend
+
+frontend/.env frontend/.env.* !frontend/.env.example
+
+==========================================
+DOCKER
+==========================================
+Fichiers locaux contenant des secrets
+
+docker-compose.override.yml
+
+==========================================
+IDE / EDITEURS
+==========================================
+
+.vscode/ .idea/ *.swp *.swo *~
+
+==========================================
+SYSTEME D'EXPLOITATION
+==========================================
+
+.DS_Store Thumbs.db desktop.ini
+
+==========================================
+SAUVEGARDES
+==========================================
+
+backups/ *.bak *.backup
+
+==========================================
+TESTS / COUVERTURE
+==========================================
+
+.pytest_cache/ .mypy_cache/ .ruff_cache/ htmlcov/
