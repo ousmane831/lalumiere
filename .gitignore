@@ -1,73 +1,39 @@
-==========================================
-PYTHON / DJANGO - BACKEND
-==========================================
-Environnement virtuel
+Python
 
-venv/ .venv/ env/
+pycache/ *.py[cod] *.pyo *.pyd
 
-Cache Python
+Environnements virtuels
 
-pycache/ *.py[cod] *$py.class
+env/ venv/ .venv/ backend/env/ backend/venv/ backend/.venv/
 
 Django
 
-*.log local_settings.py db.sqlite3 db.sqlite3-journal
+*.log local_settings.py db.sqlite3 db.sqlite3-journal media/ staticfiles/
 
-Fichiers de configuration sensibles
+Variables d'environnement et secrets
 
-.env .env.* !.env.example
+.env .env.* !.env.example backend/.env backend/.env.* !backend/.env.example
 
-Fichiers uploadés
+React / Node.js
 
-media/
+node_modules/ frontend/node_modules/ frontend/dist/ frontend/build/ frontend/coverage/
 
-Fichiers statiques collectés
-
-staticfiles/
-
-Migrations : conserver les migrations Django dans Git
-Ne pas ignorer les dossiers migrations/
-==========================================
-REACT / NODE.JS - FRONTEND
-==========================================
-
-node_modules/ dist/ build/ .next/ coverage/
-
-Fichiers de logs
+Logs Node.js
 
 npm-debug.log* yarn-debug.log* pnpm-debug.log*
 
-Variables d'environnement frontend
-
-frontend/.env frontend/.env.* !frontend/.env.example
-
-==========================================
-DOCKER
-==========================================
-Fichiers locaux contenant des secrets
-
-docker-compose.override.yml
-
-==========================================
-IDE / EDITEURS
-==========================================
-
-.vscode/ .idea/ *.swp *.swo *~
-
-==========================================
-SYSTEME D'EXPLOITATION
-==========================================
-
-.DS_Store Thumbs.db desktop.ini
-
-==========================================
-SAUVEGARDES
-==========================================
+Fichiers de sauvegarde
 
 backups/ *.bak *.backup
 
-==========================================
-TESTS / COUVERTURE
-==========================================
+IDE
+
+.vscode/ .idea/
+
+Système
+
+.DS_Store Thumbs.db
+
+Tests et cache
 
 .pytest_cache/ .mypy_cache/ .ruff_cache/ htmlcov/
