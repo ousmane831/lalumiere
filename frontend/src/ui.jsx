@@ -81,7 +81,7 @@ export function FormModal({ title, fields, initial, onSubmit, onClose, onDelete,
               <span>{f.label}</span>
               {f.options ? (
                 <select value={v[f.k]} required={f.required} onChange={(e) => set(f.k, e.target.value)}>
-                  {!f.required && <option value="">—</option>}
+                  <option value="" disabled={f.required}>{f.required ? "— Choisir —" : "—"}</option>
                   {f.options.map((o) => <option key={o.v} value={o.v}>{o.l}</option>)}
                 </select>
               ) : f.type === "textarea" ? (

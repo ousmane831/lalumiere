@@ -1,4 +1,5 @@
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useAuth } from "./auth.jsx";
 import { useFetch } from "./ui.jsx";
 import Login from "./pages/Login.jsx";
@@ -32,14 +33,30 @@ const ROLES = { director: "Directeur", secretary: "Secrétariat", accountant: "C
 
 export default function App() {
   const { user, logout } = useAuth();
+  const location = useLocation();
+  const [moreOpen, setMoreOpen] = useState(false);
   const cfg = useFetch(user ? "/settings/" : null).data;
   if (!user) return <Login />;
   const items = NAV.filter((n) => user.role === "director" || n.roles.includes(user.role));
+  const primaryItems = items.slice(0, 4);
+  const moreItems = items.slice(4);
+  const moreActive = moreItems.some((n) => n.to === "/" ? location.pathname === "/" : location.pathname.startsWith(n.to));
   return (
     <div className="shell">
       <aside className="side">
         <div className="brand">{cfg?.logo ? <img className="logo" src={cfg.logo} alt="" /> : <span className="lamp" aria-hidden="true" />}<div><b>{cfg?.name || "La Lumière"}</b><small>Gestion scolaire</small></div></div>
-        <nav>{items.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"}><i>{n.icon}</i><span>{n.label}</span></NavLink>)}</nav>
+        <nav className="desktop-nav">{items.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"}><i>{n.icon}</i><span>{n.label}</span></NavLink>)}</nav>
+        <nav className="mobile-nav" aria-label="Navigation principale">
+          {primaryItems.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"} onClick={() => setMoreOpen(false)}><i>{n.icon}</i><span>{n.label}</span></NavLink>)}
+          <button type="button" className={`mobile-more-toggle${moreActive ? " active" : ""}`} aria-expanded={moreOpen} onClick={() => setMoreOpen((open) => !open)}>
+            <i>{moreOpen ? "✕" : "☰"}</i><span>{moreOpen ? "Fermer" : "Plus"}</span>
+          </button>
+          {moreOpen && <div className="mobile-more">
+            {moreItems.map((n) => <NavLink key={n.to} to={n.to} end={n.to === "/"} onClick={() => setMoreOpen(false)}><i>{n.icon}</i><span>{n.label}</span></NavLink>)}
+            <div className="mobile-account"><b>{user.name}</b><small>{ROLES[user.role]}</small></div>
+            <button type="button" className="mobile-logout" onClick={logout}>Quitter</button>
+          </div>}
+        </nav>
         <div className="me"><div><b>{user.name}</b><small>{ROLES[user.role]}</small></div><button className="btn ghost" onClick={logout}>Quitter</button></div>
       </aside>
       <main className="main">
